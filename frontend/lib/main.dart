@@ -394,21 +394,36 @@ class _QuickActions extends StatelessWidget {
   Widget build(BuildContext context) {
     return _DashCard(
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          _ActionTile(
-            icon: Icons.fitness_center,
-            label: 'Start Workout',
-            selected: true,
-            onTap: onStart,
+          Expanded(
+            child: _ActionTile(
+              icon: Icons.fitness_center,
+              label: 'Start',
+              selected: true,
+              onTap: onStart,
+            ),
           ),
-          _ActionTile(
-            icon: Icons.assignment_outlined,
-            label: 'Templates',
-            onTap: onStart,
+          Expanded(
+            child: _ActionTile(
+              icon: Icons.assignment_outlined,
+              label: 'Templates',
+              onTap: onStart,
+            ),
           ),
-          _ActionTile(icon: Icons.history, label: 'History', onTap: () {}),
-          _ActionTile(icon: Icons.bolt, label: 'Quick Log', onTap: onQuickLog),
+          Expanded(
+            child: _ActionTile(
+              icon: Icons.history,
+              label: 'History',
+              onTap: () {},
+            ),
+          ),
+          Expanded(
+            child: _ActionTile(
+              icon: Icons.bolt,
+              label: 'Quick Log',
+              onTap: onQuickLog,
+            ),
+          ),
         ],
       ),
     );
@@ -433,30 +448,28 @@ class _ActionTile extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(18),
-      child: SizedBox(
-        width: 92,
-        child: Column(
-          children: [
-            Container(
-              width: 62,
-              height: 62,
-              decoration: BoxDecoration(
-                color: selected
-                    ? Theme.of(context).colorScheme.primary
-                    : const Color(0xFF1B2531),
-                borderRadius: BorderRadius.circular(18),
-              ),
-              child: Icon(icon, color: Colors.white, size: 28),
+      child: Column(
+        children: [
+          Container(
+            width: 56,
+            height: 56,
+            decoration: BoxDecoration(
+              color: selected
+                  ? Theme.of(context).colorScheme.primary
+                  : const Color(0xFF1B2531),
+              borderRadius: BorderRadius.circular(16),
             ),
-            const SizedBox(height: 10),
-            Text(
-              label,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
-            ),
-          ],
-        ),
+            child: Icon(icon, color: Colors.white, size: 26),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            label,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 12),
+          ),
+        ],
       ),
     );
   }
@@ -796,7 +809,7 @@ class _CoachCard extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 8),
                     Text(summary, maxLines: 3, overflow: TextOverflow.ellipsis),
                     const SizedBox(height: 8),
                     Text(
