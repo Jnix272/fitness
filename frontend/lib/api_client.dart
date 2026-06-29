@@ -24,8 +24,31 @@ class ApiClient {
     }
   }
 
+  Future<List<dynamic>> getTemplates() async {
+    final response = await http.get(Uri.parse('$baseUrl/templates'));
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Failed to load templates: ${response.body}');
+    }
+  }
+
+  Future<List<dynamic>> getExercises({String? template}) async {
+    final uri = template == null
+        ? Uri.parse('$baseUrl/exercises')
+        : Uri.parse('$baseUrl/exercises?template=$template');
+    final response = await http.get(uri);
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Failed to load exercises: ${response.body}');
+    }
+  }
+
   Future<List<dynamic>> getProtocols(String template) async {
-    final response = await http.get(Uri.parse('$baseUrl/protocols?template=$template'));
+    final response = await http.get(
+      Uri.parse('$baseUrl/protocols?template=$template'),
+    );
     if (response.statusCode == 200) {
       return jsonDecode(response.body);
     } else {
